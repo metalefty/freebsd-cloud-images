@@ -109,6 +109,7 @@ touch /etc/rc.conf
     echo 'qemu_guest_agent_enable="YES"' >> /mnt/etc/rc.conf
     echo 'qemu_guest_agent_flags="-d -v -l /var/log/qemu-ga.log"' >> /mnt/etc/rc.conf
 
+    touch /mnt/firstboot
     echo 'firstboot_freebsd_update_enable="YES"' >> /mnt/etc/rc.conf
     echo 'firstboot_pkgs_enable="YES"' >> /mnt/etc/rc.conf
     echo 'firstboot_pkgs_list=""' >> /mnt/etc/rc.conf
