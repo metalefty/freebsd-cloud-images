@@ -64,6 +64,7 @@ cd /tmp
 pkg install -y ca_root_nss
 pkg install -y net/cloud-init
 pkg install -y firstboot-freebsd-update firstboot-pkgs
+pkg install -y dual-dhclient
 cp /usr/local/etc/cloud/cloud.cfg.d/05_logging.cfg.sample /usr/local/etc/cloud/cloud.cfg.d/05_logging.cfg
 touch /etc/rc.conf
 " > /mnt/tmp/cloudify.sh
@@ -96,6 +97,7 @@ touch /etc/rc.conf
     rm -rf /mnt/tmp/*
     echo 'cloudinit_enable="YES"' >> /mnt/etc/rc.conf
     echo 'ipv6_activate_all_interfaces="YES"' >> /mnt/etc/rc.conf
+    echo 'dhclient_program="/usr/local/sbin/dual-dhclient"' >> /mnt/etc/rc.conf
     echo 'sshd_enable="YES"' >> /mnt/etc/rc.conf
     echo 'sendmail_enable="NONE"' >> /mnt/etc/rc.conf
 
