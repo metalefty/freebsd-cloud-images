@@ -63,6 +63,7 @@ export ASSUME_ALWAYS_YES=YES
 cd /tmp
 pkg install -y ca_root_nss
 pkg install -y net/cloud-init
+cp /usr/local/etc/cloud/cloud.cfg.d/05_logging.cfg.sample /usr/local/etc/cloud/cloud.cfg.d/05_logging.cfg
 touch /etc/rc.conf
 " > /mnt/tmp/cloudify.sh
 
