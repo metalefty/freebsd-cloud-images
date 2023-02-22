@@ -94,6 +94,7 @@ touch /etc/rc.conf
     echo '-P' >> /mnt/boot.config
     rm -rf /mnt/tmp/*
     echo 'cloudinit_enable="YES"' >> /mnt/etc/rc.conf
+    echo 'ipv6_activate_all_interfaces="YES"' >> /mnt/etc/rc.conf
     echo 'sshd_enable="YES"' >> /mnt/etc/rc.conf
     echo 'sendmail_enable="NONE"' >> /mnt/etc/rc.conf
 
