@@ -95,6 +95,11 @@ touch /etc/rc.conf
     echo 'console="comconsole,efi"' >> /mnt/boot/loader.conf
     echo '-P' >> /mnt/boot.config
     rm -rf /mnt/tmp/*
+
+    if [ -n "${debug}" ]; then
+        echo 'rc_debug="YES"' >> /mnt/etc/rc.conf
+    fi
+
     echo 'cloudinit_enable="YES"' >> /mnt/etc/rc.conf
     echo 'ipv6_activate_all_interfaces="YES"' >> /mnt/etc/rc.conf
     echo 'dhclient_program="/usr/local/sbin/dual-dhclient"' >> /mnt/etc/rc.conf
