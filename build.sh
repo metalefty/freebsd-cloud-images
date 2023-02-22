@@ -63,6 +63,7 @@ export ASSUME_ALWAYS_YES=YES
 cd /tmp
 pkg install -y ca_root_nss
 pkg install -y net/cloud-init
+pkg install -y firstboot-freebsd-update firstboot-pkgs
 cp /usr/local/etc/cloud/cloud.cfg.d/05_logging.cfg.sample /usr/local/etc/cloud/cloud.cfg.d/05_logging.cfg
 touch /etc/rc.conf
 " > /mnt/tmp/cloudify.sh
@@ -100,6 +101,10 @@ touch /etc/rc.conf
 
     echo 'qemu_guest_agent_enable="YES"' >> /mnt/etc/rc.conf
     echo 'qemu_guest_agent_flags="-d -v -l /var/log/qemu-ga.log"' >> /mnt/etc/rc.conf
+
+    echo 'firstboot_freebsd_update_enable="YES"' >> /mnt/etc/rc.conf
+    echo 'firstboot_pkgs_enable="YES"' >> /mnt/etc/rc.conf
+    echo 'firstboot_pkgs_list=""' >> /mnt/etc/rc.conf
 
     if [ ${root_fs} = "ufs" ]; then
         echo 'growfs_enable="YES"' >> /mnt/etc/rc.conf
