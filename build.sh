@@ -100,6 +100,10 @@ touch /etc/rc.conf
     echo 'qemu_guest_agent_enable="YES"' >> /mnt/etc/rc.conf
     echo 'qemu_guest_agent_flags="-d -v -l /var/log/qemu-ga.log"' >> /mnt/etc/rc.conf
 
+    if [ ${root_fs} = "ufs" ]; then
+        echo 'growfs_enable="YES"' >> /mnt/etc/rc.conf
+    fi
+
     echo "/etc/rc.conf"
     echo "***"
     cat /mnt/etc/rc.conf
