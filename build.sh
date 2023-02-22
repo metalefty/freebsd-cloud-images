@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 version="${1:-13.0}"
-repo="${2:-canonical/cloud-init}"
-ref="${3:-main}"
 debug=$4
 install_media="${install_media:-http}"
 requisite_pkgs="curl"
@@ -60,16 +58,12 @@ function build {
 
     curl -L ${BASE_URL}/base.txz | tar vxf - -C /mnt
     curl -L ${BASE_URL}/kernel.txz | tar vxf - -C /mnt
-    curl -L -o /mnt/tmp/cloud-init.tar.gz "https://github.com/${repo}/archive/${ref}.tar.gz"
     echo "
 export ASSUME_ALWAYS_YES=YES
 cd /tmp
 pkg install -y ca_root_nss
-tar xf cloud-init.tar.gz
-cd cloud-init-*
-pkg install -y python3 qemu-guest-agent
+pkg install -y net/cloud-init
 touch /etc/rc.conf
-./tools/build-on-freebsd
 " > /mnt/tmp/cloudify.sh
 
     if [ -z "${debug}" ]; then # Lock root account
@@ -98,6 +92,7 @@ touch /etc/rc.conf
     echo 'console="comconsole,efi"' >> /mnt/boot/loader.conf
     echo '-P' >> /mnt/boot.config
     rm -rf /mnt/tmp/*
+    echo 'cloudinit_enable="YES"' >> /mnt/etc/rc.conf
     echo 'sshd_enable="YES"' >> /mnt/etc/rc.conf
     echo 'sendmail_enable="NONE"' >> /mnt/etc/rc.conf
 
